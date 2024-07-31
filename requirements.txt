@@ -8,5 +8,5 @@ python-dotenv==1.0.1
 python-socketio==5.11.3
 PyYAML==6.0.1
 starlette==0.38.2
-uvicorn==0.30.3
+uvicorn==0.30.4
 zstandard==0.23.0

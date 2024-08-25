@@ -9,4 +9,4 @@ PyJWT==2.9.0
 python-dotenv==1.0.1
 python-socketio==5.11.3
 PyYAML==6.0.2
-pyzstd==0.15.10
+pyzstd==0.16.1

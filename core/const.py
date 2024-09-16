@@ -1,28 +1,69 @@
+import core.settings as settings
+
+latest_version = "1.11.0"
+
+headers = {
+    "User-Agent": f"iodine-at-home/{settings.VERSION} (https://github.com/ZeroNexis/iodine-at-home)"
+}
+
 # 可用字符
-all_figures = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
-all_small_letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+all_figures = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+all_small_letters = [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
+]
 
 # 敏感数据的键
-hide_keys = ["CLUSTER_SECRET", "CLUSTER_BANDWIDTH", "CLUSTER_BANREASON", "CLUSTER_HOST", "CLUSTER_PORT"]
+hide_keys = [
+    "CLUSTER_SECRET",
+    "CLUSTER_BANDWIDTH",
+    "CLUSTER_BANREASON",
+    "CLUSTER_HOST",
+    "CLUSTER_PORT",
+]
 
 # 随机 User-Agent 列表
 user_agent_list = [
     # 很普通的User-Agent
-    'Mozilla/4.0(compatible;MSIE7.0;WindowsNT5.1;AvantBrowser)',
-    'Mozilla/4.0(compatible;MSIE7.0;WindowsNT5.1;360SE)',
-    'Mozilla/4.0(compatible;MSIE7.0;WindowsNT5.1;Trident/4.0;SE2.XMetaSr1.0;SE2.XMetaSr1.0;.NETCLR2.0.50727;SE2.XMetaSr1.0)',
-    'Mozilla/4.0(compatible;MSIE7.0;WindowsNT5.1;TheWorld)',
-    'Mozilla/4.0(compatible;MSIE7.0;WindowsNT5.1;TencentTraveler4.0)',
-    'Opera/9.80(Macintosh;IntelMacOSX10.6.8;U;en)Presto/2.8.131Version/11.11',
-    'Mozilla/5.0(WindowsNT6.1;rv:2.0.1)Gecko/20100101Firefox/4.0.1',
-    'Mozilla/5.0(compatible;MSIE9.0;WindowsNT6.1;Trident/5.0',
-    'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36 OPR/26.0.1656.60',
-    'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.101 Safari/537.36',
-    'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; QQDownload 732; .NET4.0C; .NET4.0E; LBBROWSER)',
-    'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.84 Safari/535.11 SE 2.X MetaSr 1.0',
-    'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 UBrowser/4.0.3214.0 Safari/537.36',
-    'Mozilla/5.0 (X11; U; Linux x86_64; zh-CN; rv:1.9.2.10) Gecko/20100922 Ubuntu/10.10 (maverick) Firefox/3.6.10',
-    'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.163 Safari/535.1',
+    "Mozilla/4.0(compatible;MSIE7.0;WindowsNT5.1;AvantBrowser)",
+    "Mozilla/4.0(compatible;MSIE7.0;WindowsNT5.1;360SE)",
+    "Mozilla/4.0(compatible;MSIE7.0;WindowsNT5.1;Trident/4.0;SE2.XMetaSr1.0;SE2.XMetaSr1.0;.NETCLR2.0.50727;SE2.XMetaSr1.0)",
+    "Mozilla/4.0(compatible;MSIE7.0;WindowsNT5.1;TheWorld)",
+    "Mozilla/4.0(compatible;MSIE7.0;WindowsNT5.1;TencentTraveler4.0)",
+    "Opera/9.80(Macintosh;IntelMacOSX10.6.8;U;en)Presto/2.8.131Version/11.11",
+    "Mozilla/5.0(WindowsNT6.1;rv:2.0.1)Gecko/20100101Firefox/4.0.1",
+    "Mozilla/5.0(compatible;MSIE9.0;WindowsNT6.1;Trident/5.0",
+    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36 OPR/26.0.1656.60",
+    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.101 Safari/537.36",
+    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; QQDownload 732; .NET4.0C; .NET4.0E; LBBROWSER)",
+    "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.84 Safari/535.11 SE 2.X MetaSr 1.0",
+    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 UBrowser/4.0.3214.0 Safari/537.36",
+    "Mozilla/5.0 (X11; U; Linux x86_64; zh-CN; rv:1.9.2.10) Gecko/20100922 Ubuntu/10.10 (maverick) Firefox/3.6.10",
+    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.163 Safari/535.1",
     "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowser; .NET CLR 1.1.4322; .NET CLR 2.0.50727)",
     "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Acoo Browser; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.0.04506)",
     "Mozilla/4.0 (compatible; MSIE 7.0; AOL 9.5; AOLBuild 4337.35; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)",
@@ -123,11 +164,11 @@ user_agent_list = [
     "got",
     "Buy us a coffee",
     ## 群友们的 DICK 长度
-    "yanmo-disk/114514cm"
+    "yanmo-disk/114514cm",
     "unify-dick/40cm",
     "cooollawf-dick/15cm",
     "yangfan-dick/16cm",
-    "cooollawf-lnspur/smart-114514"
+    "cooollawf-lnspur/smart-114514",
 ]
 
 conflict_response = """

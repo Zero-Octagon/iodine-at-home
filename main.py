@@ -4,8 +4,14 @@ from core.logger import logger
 py_version = sys.version_info
 
 if py_version < (3, 9):
-    logger.info(f'你使用的 Python 版本是 {py_version[0]}.{py_version[1]}.{py_version[2]}，')
-    logger.info(f'而该程序要求使用 3.9 版本及以上的 Python，请及时更换。')
+    logger.tinfo(
+        "main.info.python_version",
+        major=py_version[0],
+        minor=py_version[1],
+        patch=py_version[2],
+    )
+    logger.tinfo("main.info.supported_version")
     sys.exit(1)
 import core
-core.init() # 初始化
+
+core.init()  # 初始化

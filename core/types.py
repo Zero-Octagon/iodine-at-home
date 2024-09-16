@@ -8,17 +8,19 @@ from core.logger import logger
 import core.datafile as datafile
 from core.database import database
 
+
 class Cluster:
+
     def __init__(self, id: str):
         self.id = id
-        
+
     async def initialize(self):
         if await database.query_cluster_data(self.id):
             await self.update()
             return True
         else:
             return False
-    
+
     async def update(self):
         all_data = await database.query_cluster_data(self.id)
         self.secret = str(all_data["CLUSTER_SECRET"])
@@ -35,17 +37,52 @@ class Cluster:
         self.version = str(all_data["CLUSTER_VERSION"])
         self.runtime = str(all_data["CLUSTER_RUNTIME"])
 
-    async def edit(self, name: str = None, secret: str = None, bandwidth: int = None, trust: int = None, isBanned: bool = None, ban_reason: str = None, host: str = None, port: int = None, version: str = None, runtime: str = None):
-        await database.edit_cluster(id=self.id, name=name, secret=secret, bandwidth=bandwidth, trust=trust, isBanned=isBanned, ban_reason=ban_reason, host=host, port=port, version=version, runtime=runtime)
+    async def edit(
+        self,
+        name: str = None,
+        secret: str = None,
+        bandwidth: int = None,
+        trust: int = None,
+        isBanned: bool = None,
+        ban_reason: str = None,
+        host: str = None,
+        port: int = None,
+        version: str = None,
+        runtime: str = None,
+    ):
+        await database.edit_cluster(
+            id=self.id,
+            name=name,
+            secret=secret,
+            bandwidth=bandwidth,
+            trust=trust,
+            isBanned=isBanned,
+            ban_reason=ban_reason,
+            host=host,
+            port=port,
+            version=version,
+            runtime=runtime,
+        )
         await self.update()
-    
+
     def json(self):
-        return {"name": self.name, "id": self.id, "secret": self.secret, "trust": self.trust, "bandwidth": self.bandwidth, "host": self.host, "port": self.port, "version": self.version}
+        return {
+            "name": self.name,
+            "id": self.id,
+            "secret": self.secret,
+            "trust": self.trust,
+            "bandwidth": self.bandwidth,
+            "host": self.host,
+            "port": self.port,
+            "version": self.version,
+        }
+
 
 # 本段修改自 TTB-Network/python-openbmclapi 中部分代码
 # 仓库链接: https://github.com/TTB-Network/python-openbmclapi
 # 源代码使用 MIT License 协议开源 | Copyright (c) 2024 TTB-Network
 class Avro:
+
     def __init__(self, initial_bytes: bytes = b"", encoding: str = "utf-8") -> None:
         self.io = io.BytesIO(initial_bytes)
         self.encoding = encoding
@@ -144,29 +181,31 @@ class Avro:
 
     def __len__(self) -> int:
         return self.io.tell()
-    
+
     @staticmethod
     def getVarInt(data: int):
         r: bytes = b""
         data = (data << 1) ^ (data >> 63)
         while (data & ~0x7F) != 0:
-            r += ((data & 0x7f) | 0x80).to_bytes(1, "big")
+            r += ((data & 0x7F) | 0x80).to_bytes(1, "big")
             data >>= 7
         r += data.to_bytes(1, "big")
         return r
 
+
 class FileObject:
+
     def __init__(self, filepath: str):
-        self.path = filepath.lstrip('.')
+        self.path = filepath.lstrip(".")
         self.hash = utils.hash_file(f".{self.path}")
         self.size = os.path.getsize(f".{self.path}")
         self.mtime = int(os.path.getmtime(f".{self.path}") * 1000)
-    
+
     def to_string(self) -> str:
         return f"<FileObject path={self.path} hash={self.hash} size={self.size} mtime={self.mtime}>"
-    
+
     def __str__(self) -> str:
         return self.to_string()
-    
+
     def __repr__(self) -> str:
         return self.to_string()

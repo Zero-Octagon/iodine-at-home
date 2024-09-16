@@ -1,4 +1,3 @@
 ## 待办清单
-- [x] 优化运行时的性能，提高响应速度
-- [x] 弃用 feather 数据存储，改用 json 进行存储数据
-- [x] 自动更新上游 GitHub 存储库的内容
+- [ ] refactor: 改用 MongoDB
+- [ ] feat: 增加插件 API 
